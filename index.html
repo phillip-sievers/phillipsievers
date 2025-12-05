@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Phillip Sievers</title>
+        <style>
+            :root {
+                --bg: #ffffff;
+                --text: #000000;
+                --border: rgba(0, 0, 0, 0.2);
+                --border-hover: rgba(0, 0, 0, 0.6);
+                --bg-hover: rgba(0, 0, 0, 0.05);
+                --fixed-header-color: #888;
+                --transition: 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+            }
+
+            body.dark {
+                --bg: #000000;
+                --text: #ffffff;
+                --border: rgba(255, 255, 255, 0.2);
+                --border-hover: rgba(255, 255, 255, 0.6);
+                --bg-hover: rgba(255, 255, 255, 0.05);
+            }
+
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                overflow: hidden;
+            }
+
+            body {
+                background-color: var(--bg);
+                color: var(--text);
+                font-family: monospace;
+                text-transform: uppercase;
+                font-variant: small-caps;
+                transition: background-color 0.3s, color 0.3s;
+            }
+
+            .fixed-logo {
+                position: fixed;
+                top: 2rem;
+                left: 2rem;
+                z-index: 1000;
+                color: var(--fixed-header-color);
+                font-size: 1.5rem;
+                font-weight: 500;
+                pointer-events: none;
+                letter-spacing: 0.05em;
+            }
+
+            .view-wrapper {
+                height: 100vh;
+                width: 100%;
+                transition: transform var(--transition);
+                will-change: transform;
+            }
+
+            section {
+                height: 100vh;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+            }
+
+            nav {
+                display: flex;
+                gap: 3rem;
+                margin-bottom: 2rem;
+            }
+
+            a,
+            button {
+                position: relative;
+                color: inherit;
+                text-decoration: none;
+                background: none;
+                border: none;
+                cursor: pointer;
+                transition: opacity 0.2s;
+                font-size: 1rem;
+                padding: 2em;
+                margin: -1.5em;
+            }
+
+            a:hover,
+            button:hover {
+                opacity: 0.5;
+            }
+
+            .unselectable {
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            #down-trigger {
+                position: absolute;
+                bottom: 4rem;
+            }
+
+            .bounce {
+                animation: bounce 2s infinite;
+            }
+            @keyframes bounce {
+                0%,
+                20%,
+                50%,
+                80%,
+                100% {
+                    transform: translateY(0);
+                }
+                40% {
+                    transform: translateY(-10px);
+                }
+                60% {
+                    transform: translateY(-5px);
+                }
+            }
+
+            .blog-container {
+                width: 100%;
+                max-width: 50rem;
+                padding: 2rem;
+            }
+
+            .blog-list {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            article {
+                padding: 1.5rem;
+                border: 1px solid var(--border);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                transition: all 0.2s;
+                cursor: pointer;
+            }
+
+            article:hover {
+                border-color: var(--border-hover);
+                background: var(--bg-hover);
+                transform: scale(1.01);
+            }
+
+            .post-title {
+                text-transform: lowercase;
+                font-size: 1.1rem;
+            }
+            .post-date {
+                color: var(--border);
+                font-size: 0.9rem;
+            }
+
+            .hidden {
+                display: none;
+            }
+        </style>
+    </head>
+    <body class="dark">
+        <div class="fixed-logo">phillip sievers</div>
+
+        <div id="wrapper" class="view-wrapper">
+            <section id="landing">
+                <nav>
+                    <a
+                        class="unselectable"
+                        href="https://www.linkedin.com/in/phillip-sievers-7a19861bb/"
+                        target="_blank"
+                        >linkedin</a
+                    >
+                    <a
+                        class="unselectable"
+                        href="https://github.com/phillip-sievers"
+                        target="_blank"
+                        >github</a
+                    >
+                    <a
+                        class="unselectable"
+                        href="/Phillip_Sievers_Resume.pdf"
+                        target="_blank"
+                        >resume</a
+                    >
+                </nav>
+
+                <button
+                    id="down-trigger"
+                    style="margin-top: 2rem"
+                    aria-label="Scroll down">
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        class="bounce">
+                        <path d="m6 9 6 6 6-6" />
+                    </svg>
+                </button>
+            </section>
+
+            <section id="blog">
+                <div class="blog-container">
+                    <div class="blog-list">
+                        to be cont.
+                        <article class="hidden">
+                            <span class="post-title"
+                                >exploring the beta-vae</span
+                            >
+                            <time class="post-date">2025-11-18</time>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <script>
+            const themeQuery = window.matchMedia(
+                "(prefers-color-scheme: dark)"
+            );
+
+            function applySystemTheme(e) {
+                if (e.matches) {
+                    document.body.classList.add("dark");
+                } else {
+                    document.body.classList.remove("dark");
+                }
+            }
+            applySystemTheme(themeQuery);
+
+            const wrapper = document.getElementById("wrapper");
+            const downBtn = document.getElementById("down-trigger");
+
+            let viewIndex = 0;
+            let isAnimating = false;
+
+            function switchView(targetIndex) {
+                if (isAnimating || targetIndex === viewIndex) return;
+                if (targetIndex < 0 || targetIndex > 1) return;
+
+                isAnimating = true;
+                viewIndex = targetIndex;
+
+                wrapper.style.transform = `translateY(-${viewIndex * 100}vh)`;
+                setTimeout(() => {
+                    isAnimating = false;
+                    downBtn.style.display = viewIndex === 0 ? "block" : "none";
+                }, 900);
+            }
+
+            // block all scroll stuff
+            window.addEventListener("wheel", (e) => {
+                if (e.deltaY > 0) switchView(1);
+                else if (e.deltaY < 0) switchView(0);
+            });
+
+            window.addEventListener("keydown", (e) => {
+                if (e.key === "ArrowDown" || e.key === " ") switchView(1);
+                if (e.key === "ArrowUp") switchView(0);
+            });
+
+            let touchStart = 0;
+            window.addEventListener(
+                "touchstart",
+                (e) => (touchStart = e.touches[0].clientY)
+            );
+            window.addEventListener("touchend", (e) => {
+                const touchEnd = e.changedTouches[0].clientY;
+                const diff = touchStart - touchEnd;
+                if (diff > 50) switchView(1);
+                if (diff < -50) switchView(0);
+            });
+
+            downBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                switchView(1);
+            });
+
+            document.body.addEventListener("click", (e) => {
+                const interactive = e.target.closest("a, button, article");
+                if (!interactive) {
+                    document.body.classList.toggle("dark");
+                }
+            });
+        </script>
+    </body>
+</html>
