@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" data-font="martian" class="locked">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Writing — Phillip Sievers</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Poiret+One&display=swap"
+            rel="stylesheet" />
+        <link rel="stylesheet" href="assets/site.css" />
+    </head>
+    <body>
+        <canvas id="illum"></canvas>
+
+        <header class="site-head unselectable">
+            <a href="index.html" class="crumb">Phillip Sievers</a>
+            <span class="sep">/</span>
+            <span>Writing</span>
+        </header>
+
+        <main class="blog-page">
+            <div class="page-head">
+                <div class="eyebrow">
+                    Writing · <span id="all-count"></span> posts
+                </div>
+                <h1>Still figuring it out but committed to memory</h1>
+                <p class="tagline">
+                    Shorts on machine learning, software, design, and the
+                    occasional book, adventure or observation.
+                </p>
+            </div>
+
+            <div class="scroll-area">
+                <ul class="post-list" id="post-list"></ul>
+            </div>
+
+            <div class="blog-footer">
+                <a href="index.html"><span class="arrow left">←</span> home</a>
+                <span>archived chronologically · oldest last</span>
+            </div>
+        </main>
+
+        <script src="assets/illum.js"></script>
+        <script src="assets/posts.js"></script>
+        <script src="assets/site.js"></script>
+        <script>
+            Site.renderList("#post-list");
+            document.getElementById("all-count").textContent = window.POSTS
+                .length
+                ? String(window.POSTS.length).padStart(2, "0")
+                : "— —";
+        </script>
+    </body>
+</html>
